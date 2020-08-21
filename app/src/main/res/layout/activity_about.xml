@@ -8,13 +8,19 @@
 
   <android.support.design.widget.AppBarLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content" android:visibility="gone">
     <android.support.v7.widget.Toolbar
       android:id="@+id/toolbar"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       app:layout_scrollFlags="scroll|enterAlways"/>
-  </android.support.design.widget.AppBarLayout>
+  </android.support.design.widget.AppBarLayout >
+
+  <com.heytap.wearable.support.widget.HeyBackTitleBar
+      android:id="@+id/back_titlebar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:heyText="@string/about" />
 
   <RelativeLayout
     android:layout_width="match_parent"
@@ -27,7 +33,8 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_alignParentTop="true"
-      android:scaleType="centerCrop"
+      android:scaleType="centerInside"
+      android:adjustViewBounds="true"
       android:src="@drawable/image_aboutus"
       android:background="@color/transparent"/>
 

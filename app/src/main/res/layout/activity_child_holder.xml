@@ -8,9 +8,15 @@
 
   <android.support.design.widget.AppBarLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content" android:visibility="gone">
     <include layout="@layout/toolbar"/>
   </android.support.design.widget.AppBarLayout>
+
+  <com.heytap.wearable.support.widget.HeyBackTitleBar
+      android:id="@+id/back_titlebar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:heyText="" />
 
   <View
     android:layout_width="match_parent"
@@ -21,27 +27,20 @@
     android:background="?attr/background_color_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <fragment
-      android:name="remix.myplayer.ui.fragment.BottomActionBarFragment"
-      android:id="@+id/bottom_actionbar_new"
-      android:layout_width="match_parent"
-      android:layout_height="@dimen/item_height"
-      android:layout_alignParentBottom="true"/>
+
     <TextView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:id="@+id/childholder_item_num"
       android:textColor="?attr/text_color_secondary"
       android:textSize="@dimen/s12_size"
-      android:layout_above="@id/bottom_actionbar_new"
       android:layout_centerHorizontal="true"
       android:layout_marginTop="@dimen/d14_size"
-      android:layout_marginBottom="@dimen/d24_size"/>
-    <remix.myplayer.ui.widget.fastcroll_recyclerview.FastScrollRecyclerView
+      android:layout_marginBottom="@dimen/d24_size" android:visibility="gone"/>
+     <remix.myplayer.ui.widget.fastcroll_recyclerview.FastScrollRecyclerView
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:id="@+id/child_holder_recyclerView"
-      android:layout_above="@id/childholder_item_num"
       app:bubbleColor="?attr/colorAccent"
       app:handleColor="?attr/colorAccent"
       app:hideScrollbar="true"

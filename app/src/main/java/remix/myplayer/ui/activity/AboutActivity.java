@@ -4,6 +4,9 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.TextView;
+
+import com.heytap.wearable.support.widget.HeyBackTitleBar;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import remix.myplayer.App;
@@ -14,6 +17,8 @@ import remix.myplayer.R;
  */
 public class AboutActivity extends ToolbarActivity {
 
+  @BindView(R.id.back_titlebar)
+  HeyBackTitleBar mBackTitleBar;
   @BindView(R.id.about_text)
   TextView mVersion;
 
@@ -21,8 +26,11 @@ public class AboutActivity extends ToolbarActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_about);
-
     ButterKnife.bind(this);
+
+    mBackTitleBar.setBackListener(view -> {
+      finish();
+    }, this);
     try {
       PackageManager pm = App.getContext().getPackageManager();
       PackageInfo pi = pm

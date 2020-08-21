@@ -158,6 +158,13 @@ open class BaseMusicActivity : BaseActivity(), MusicEventCallback, CoroutineScop
     }
   }
 
+  override fun onLoveStateChange() {
+    Timber.tag(TAG).v("onLoveStateChange")
+    for (listener in serviceEventListeners) {
+      listener.onLoveStateChange()
+    }
+  }
+
   override fun onTagChanged(oldSong: Song, newSong: Song) {
     Timber.tag(TAG).v("onTagChanged")
     for (listener in serviceEventListeners) {
@@ -175,6 +182,7 @@ open class BaseMusicActivity : BaseActivity(), MusicEventCallback, CoroutineScop
       filter.addAction(MusicService.MEDIA_STORE_CHANGE)
       filter.addAction(MusicService.META_CHANGE)
       filter.addAction(MusicService.PLAY_STATE_CHANGE)
+      filter.addAction(MusicService.LOVE_STATE_CHANGE)
       filter.addAction(MusicService.TAG_CHANGE)
       registerLocalReceiver(musicStateReceiver, filter)
       receiverRegistered = true
@@ -220,6 +228,9 @@ open class BaseMusicActivity : BaseActivity(), MusicEventCallback, CoroutineScop
           }
           MusicService.PLAY_STATE_CHANGE -> {
             activity.onPlayStateChange()
+          }
+          MusicService.LOVE_STATE_CHANGE -> {
+            activity.onLoveStateChange()
           }
           MusicService.TAG_CHANGE -> {
             val newSong = msg.data.getParcelable<Song?>(EXTRA_NEW_SONG)

@@ -140,6 +140,11 @@ object MusicServiceRemote {
   }
 
   @JvmStatic
+  fun getIsLove(): Boolean {
+    return service?.isLove ?: false
+  }
+
+  @JvmStatic
   fun playNext(next: Boolean) {
     service?.playNextOrPrev(next)
   }

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.heytap.wearable.support.widget.HeyBackTitleBar
+        android:id="@+id/back_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:heyText="@string/manage" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <com.heytap.wearable.support.widget.HeyMultipleDefaultItem
+                android:id="@+id/manage_local_songs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:heyText="@string/manage_local_songs"
+                app:heySummaryText="@string/manage_local_songs_summary"
+                app:heyPrimaryImage="@drawable/hey_arrow" />
+            <com.heytap.wearable.support.widget.HeyMultipleDefaultItem
+                android:id="@+id/manage_my_favorite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:heyText="@string/manage_my_favorite"
+                app:heySummaryText="@string/manage_my_favorite_summary"
+                app:heyPrimaryImage="@drawable/hey_arrow" />
+            <com.heytap.wearable.support.widget.HeyMultipleDefaultItem
+                android:id="@+id/manage_scan_media"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:heyText="@string/manual_scan"
+                app:heySummaryText="@string/manual_scan_tip"
+                app:heyPrimaryImage="@drawable/hey_arrow" />
+            <com.heytap.wearable.support.widget.HeySingleDefaultItem
+                android:id="@+id/manage_about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:heyPrimaryImage="@drawable/hey_arrow"
+                app:heyText="@string/about_info"/>
+            <com.heytap.wearable.support.widget.HeySingleItemWithSummary
+                android:id="@+id/manage_clear_cache"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:heyText="@string/clear_cache"
+                app:heySummaryText="0 MB"
+                />
+            <com.heytap.wearable.support.widget.HeySingleItemWithSummary
+                android:id="@+id/manage_exit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:heyText="@string/exit"
+                app:heySummaryText=""
+                />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

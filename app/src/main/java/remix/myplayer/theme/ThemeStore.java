@@ -36,7 +36,7 @@ public class ThemeStore {
 
   public static boolean sColoredNavigation = false;
   public static boolean sImmersiveMode = false;
-  public static String sTheme = LIGHT;
+  public static String sTheme = BLACK;
 
 
   public static void setGeneralTheme(int pos) {
@@ -57,7 +57,7 @@ public class ThemeStore {
       case DARK:
         return App.getContext().getString(R.string.dark_theme);
       default:
-        return App.getContext().getString(R.string.light_theme);
+        return App.getContext().getString(R.string.black_theme);
     }
   }
 
@@ -71,18 +71,18 @@ public class ThemeStore {
       case DARK:
         return R.style.Theme_APlayer_Dark;
       default:
-        return R.style.Theme_APlayer;
+        return R.style.Theme_APlayer_Black;
     }
   }
 
   public static int getHighLightTextColor() {
     int primaryColor = getMaterialPrimaryColor();
-    if (ColorUtil.isColorCloseToWhite(primaryColor) && isLightTheme()) {
-      primaryColor = getTextColorPrimary();
-    }
-    if (ColorUtil.isColorCloseToBlack(primaryColor) && isBlackTheme()) {
-      primaryColor = getTextColorPrimary();
-    }
+//    if (ColorUtil.isColorCloseToWhite(primaryColor) && isLightTheme()) {
+//      primaryColor = getTextColorPrimary();
+//    }
+//    if (ColorUtil.isColorCloseToBlack(primaryColor) && isBlackTheme()) {
+//      primaryColor = getTextColorPrimary();
+//    }
     return primaryColor;
   }
 
@@ -113,9 +113,9 @@ public class ThemeStore {
     //纯白需要处理下
     int accentColor = SPUtil
         .getValue(App.getContext(), NAME, KEY_ACCENT_COLOR, Color.parseColor("#698cf6"));
-    if (ColorUtil.isColorCloseToWhite(accentColor)) {
-      accentColor = ColorUtil.getColor(R.color.accent_gray_color);
-    }
+//    if (ColorUtil.isColorCloseToWhite(accentColor)) {
+//      accentColor = ColorUtil.getColor(R.color.accent_gray_color);
+//    }
     return accentColor;
   }
 

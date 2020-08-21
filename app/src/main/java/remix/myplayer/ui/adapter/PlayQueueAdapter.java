@@ -1,12 +1,16 @@
 package remix.myplayer.ui.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import butterknife.BindView;
 import java.util.Collections;
+import java.util.List;
+
 import remix.myplayer.R;
 import remix.myplayer.bean.mp3.Song;
 import remix.myplayer.db.room.DatabaseRepository;
@@ -16,6 +20,9 @@ import remix.myplayer.service.Command;
 import remix.myplayer.theme.ThemeStore;
 import remix.myplayer.ui.adapter.holder.BaseViewHolder;
 import remix.myplayer.util.Util;
+
+import static remix.myplayer.theme.ThemeStore.getHighLightTextColor;
+import static remix.myplayer.theme.ThemeStore.getTextColorPrimary;
 
 /**
  * Created by Remix on 2015/12/2.
@@ -28,11 +35,24 @@ public class PlayQueueAdapter extends BaseAdapter<Song, PlayQueueAdapter.PlayQue
 
   private int mAccentColor;
   private int mTextColor;
+  private Song mLastPlaySong = MusicServiceRemote.getCurrentSong();
+  private int selectedPosition = -1;
+  protected RecyclerView mRecyclerView;
 
   public PlayQueueAdapter(int layoutId) {
+    this(layoutId, null);
+  }
+
+  public PlayQueueAdapter(int layoutId, RecyclerView recyclerView) {
     super(layoutId);
     mAccentColor = ThemeStore.getAccentColor();
     mTextColor = ThemeStore.getTextColorPrimary();
+    mRecyclerView = recyclerView;
+  }
+
+  @Override
+  public void onBindViewHolder(@NonNull PlayQueueHolder holder, int position, @NonNull List<Object> payloads) {
+    super.onBindViewHolder(holder, position, payloads);
   }
 
   @Override
@@ -71,6 +91,34 @@ public class PlayQueueAdapter extends BaseAdapter<Song, PlayQueueAdapter.PlayQue
           v -> mOnItemClickListener.onItemClick(v, holder.getAdapterPosition()));
     }
 
+  }
+
+  /**
+   * 更新高亮歌曲
+   */
+  public void updatePlayingSong() {
+    final Song currentSong = MusicServiceRemote.getCurrentSong();
+    if (currentSong.getId() == -1 || currentSong.getId() == mLastPlaySong.getId()) {
+      return;
+    }
+
+    if (mRecyclerView == null) {
+      return;
+    }
+
+    if (mDatas != null && mDatas.indexOf(currentSong) >= 0) {
+      // 找到新的高亮歌曲，标记需刷新
+      final int index = mDatas.indexOf(currentSong);
+      final int lastIndex = mDatas.indexOf(mLastPlaySong);
+      if (index >= 0) {
+        notifyItemChanged(index);
+      }
+      if (lastIndex >= 0) {
+        notifyItemChanged(lastIndex);
+      }
+
+      mLastPlaySong = currentSong;
+    }
   }
 
   static class PlayQueueHolder extends BaseViewHolder {

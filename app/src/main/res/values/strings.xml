@@ -409,4 +409,10 @@
   <string name="deleting">Deleting</string>
   <string name="adding">Adding</string>
   <string name="send_log">Whether to send log at the same time?</string>
+
+  <string name="manage">Manage</string>
+  <string name="manage_local_songs">Local Songs</string>
+  <string name="manage_local_songs_summary">View all local storage songs</string>
+  <string name="manage_my_favorite">My Favorites</string>
+  <string name="manage_my_favorite_summary">View all my favorite songs</string>
 </resources>

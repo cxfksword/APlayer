@@ -18,6 +18,9 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
+
+import com.heytap.wearable.support.widget.HeyBackTitleBar;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.SingleSource;
@@ -64,6 +67,8 @@ public class ChildHolderActivity extends LibraryActivity<Song, ChildHolderAdapte
   private int mType;
   private String mArg;
 
+  @BindView(R.id.back_titlebar)
+  HeyBackTitleBar mBackTitleBar;
   //歌曲数目与标题
   @BindView(R.id.childholder_item_num)
   TextView mNum;
@@ -85,6 +90,10 @@ public class ChildHolderActivity extends LibraryActivity<Song, ChildHolderAdapte
     setContentView(R.layout.activity_child_holder);
     ButterKnife.bind(this);
 
+    mBackTitleBar.setBackListener(view -> {
+      finish();
+    }, this);
+
     mRefreshHandler = new MsgHandler(this);
 
     //参数id，类型，标题
@@ -97,6 +106,7 @@ public class ChildHolderActivity extends LibraryActivity<Song, ChildHolderAdapte
       return;
     }
 
+    mBackTitleBar.setTitle(mArg);
     mChoice = new MultipleChoice<>(this,
         mType == Constants.PLAYLIST ? Constants.PLAYLISTSONG : Constants.SONG);
 
@@ -290,6 +300,14 @@ public class ChildHolderActivity extends LibraryActivity<Song, ChildHolderAdapte
       //文件夹名
       case Constants.FOLDER:
         return MediaStoreUtil.getSongsByParentId(mId);
+      //我的收藏
+      case Constants.MYFAVORITE:
+          return DatabaseRepository.getInstance()
+                  .getMyLovePlayList()
+                  .flatMap((Function<PlayList, SingleSource<List<Song>>>) playList ->
+                          DatabaseRepository.getInstance()
+                                  .getPlayListSongs(mContext, playList, false))
+                  .blockingGet();
       //播放列表名
       case Constants.PLAYLIST:
         /* 播放列表歌曲id列表 */

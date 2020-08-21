@@ -5,6 +5,7 @@ import android.media.MediaScannerConnection
 import android.net.Uri
 import android.provider.MediaStore
 import android.webkit.MimeTypeMap
+import com.heytap.wearable.support.widget.HeyLoadingDialog
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.FlowableOnSubscribe
@@ -50,14 +51,7 @@ class MediaScanner(private val context: Context) {
     var connection: MediaScannerConnection? = null
     val toScanFiles = ArrayList<File>()
 
-    val loadingDialog = Theme.getBaseDialog(context)
-        .cancelable(false)
-        .title(R.string.please_wait)
-        .content(R.string.scaning)
-        .progress(true, 0)
-        .progressIndeterminateStyle(false)
-        .dismissListener { connection?.disconnect() }
-        .build()
+    val loadingDialog =  HeyLoadingDialog(context, R.string.scaning)
 
     connection = MediaScannerConnection(context, object : MediaScannerConnection.MediaScannerConnectionClient {
       override fun onMediaScannerConnected() {
@@ -78,7 +72,7 @@ class MediaScanner(private val context: Context) {
               }
 
               override fun onNext(file: File) {
-                loadingDialog.setContent(file.absolutePath)
+                loadingDialog.setLoadingText(file.absolutePath)
                 connection?.scanFile(file.absolutePath, "audio/*")
               }
 

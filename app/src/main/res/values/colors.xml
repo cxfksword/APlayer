@@ -45,6 +45,7 @@
   <!--Divider-->
   <color name="black_background_color_main">#000000</color>
   <color name="black_library_color">#000000</color>
+  <color name="black_bg_list_color">#161717</color>
 
   <!--New End-->
 
@@ -68,7 +69,7 @@
   <color name="detail_text_color">#737373</color>
 
   <color name="default_accent_color">#555393</color>
-  <color name="player_top_detail_text_color">#7e7e7e</color>
+  <color name="player_top_detail_text_color">#bbffffff</color>
   <color name="player_time_text_color">#6b6b6b</color>
   <color name="timer_text_color">#404040</color>
 

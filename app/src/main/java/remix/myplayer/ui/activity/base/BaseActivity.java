@@ -11,6 +11,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
+
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import remix.myplayer.BuildConfig;
 import remix.myplayer.helper.LanguageHelper;
@@ -49,6 +51,7 @@ public class BaseActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     mContext = this;
     mHasPermission = Util.hasPermissions(EXTERNAL_STORAGE_PERMISSIONS);
+    getWindow().requestFeature(Window.FEATURE_SWIPE_TO_DISMISS);
     //严格模式
     if (BuildConfig.DEBUG) {
 //      StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
@@ -80,9 +83,10 @@ public class BaseActivity extends AppCompatActivity {
 
   @Override
   public void setContentView(int layoutResID) {
+    getWindow().requestFeature(Window.FEATURE_SWIPE_TO_DISMISS);
     super.setContentView(layoutResID);
-    setStatusBarColor();
-    setStatusBarMode();
+//    setStatusBarColor();
+//    setStatusBarMode();
   }
 
   protected void setStatusBarMode() {

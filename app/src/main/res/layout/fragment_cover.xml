@@ -5,28 +5,159 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
-  <remix.myplayer.ui.widget.AutoFitSquareCardView
+  <android.support.v7.widget.CardView
     android:id="@+id/cover_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerHorizontal="true"
     android:visibility="visible"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    android:layout_marginBottom="16dp"
-    android:layout_marginTop="4dp"
-    app:cardElevation="8dp">
-    <com.facebook.drawee.view.SimpleDraweeView
-      android:id="@+id/cover_image"
-      android:visibility="visible"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:layout_gravity="center"
-      app:failureImage="@drawable/album_empty_bg_day"
-      app:failureImageScaleType="centerCrop"
-      app:actualImageScaleType="centerCrop"
-      app:placeholderImageScaleType="centerCrop"
-      app:fadeDuration="0"/>
-  </remix.myplayer.ui.widget.AutoFitSquareCardView>
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp"
+    android:layout_marginBottom="0dp"
+    android:layout_marginTop="0dp"
+    app:cardBackgroundColor="?attr/background_color_main"
+    app:cardCornerRadius="20dp">
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="match_parent">
+      <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/cover_image"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        app:failureImage="@drawable/album_empty_bg_day"
+        app:failureImageScaleType="centerCrop"
+        app:actualImageScaleType="centerCrop"
+        app:placeholderImageScaleType="centerCrop"
+        app:fadeDuration="0"/>
+      <View android:background="@drawable/mengceng" android:layout_width="match_parent" android:layout_height="match_parent" android:layout_alignBottom="@+id/cover_image"/>
+      <LinearLayout
+          android:id="@+id/song_info"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:layout_margin="@dimen/d10_size">
+        <TextView
+            android:id="@+id/song_title"
+            android:ellipsize="end"
+            android:lines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/s20_size"
+            />
+        <TextView
+            android:id="@+id/song_detail"
+            android:ellipsize="end"
+            android:lines="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/song_title"
+            android:textColor="@color/player_top_detail_text_color"
+            android:singleLine="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:textSize="@dimen/s14_size"/>
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/song_info"
+          android:paddingLeft="@dimen/d5_szie"
+          android:paddingRight="@dimen/d5_szie"
+          android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/playbar_prev"
+            android:layout_width="@dimen/d36_size"
+            android:layout_height="@dimen/d36_size"
+            android:layout_gravity="left|center_vertical|center_horizontal|center"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            app:srcCompat="@drawable/play_btn_pre"
+            android:background="@drawable/icon_background_selector"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+          <com.github.lzyzsd.circleprogress.DonutProgress
+              android:id="@+id/playbar_toggle_play"
+              android:layout_width="@dimen/d56_size"
+              android:layout_height="@dimen/d56_size"
+              app:donut_circle_starting_degree="270"
+              app:donut_show_text="false"
+              app:donut_unfinished_stroke_width="2dp"
+              app:donut_finished_stroke_width="2dp"
+              app:donut_inner_drawable="@drawable/play_btn_play"
+              app:donut_finished_color="#ffffdf1f"
+              app:donut_unfinished_color="#33feb610" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/playbar_next"
+            android:layout_width="@dimen/d36_size"
+            android:layout_height="@dimen/d36_size"
+            android:layout_gravity="right|center_vertical|center_horizontal|center"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:layout_alignParentRight="true"
+            app:srcCompat="@drawable/play_btn_next"
+            android:background="@drawable/icon_background_selector"/>
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_alignParentBottom="true"
+          android:paddingLeft="@dimen/d10_size"
+          android:paddingRight="@dimen/d10_size"
+          android:orientation="horizontal">
+        <ImageButton
+            android:layout_width="@dimen/d30_size"
+            android:layout_height="@dimen/d30_size"
+            android:layout_gravity="left|center_vertical|center_horizontal|center"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:id="@+id/playbar_volume"
+            app:srcCompat="@drawable/icon_volume"
+            android:background="@drawable/icon_background_selector"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+          <ImageButton
+              android:layout_width="@dimen/d30_size"
+              android:layout_height="@dimen/d30_size"
+              android:scaleType="fitXY"
+              android:adjustViewBounds="true"
+              android:id="@+id/playbar_collect"
+              app:srcCompat="@drawable/icon_collect"
+              android:background="@drawable/icon_background_selector"/>
+        </LinearLayout>
+
+        <ImageButton
+            android:layout_width="@dimen/d30_size"
+            android:layout_height="@dimen/d30_size"
+            android:layout_gravity="right|center_vertical|center_horizontal|center"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:id="@+id/playbar_model"
+            app:srcCompat="@drawable/play_btn_loop"
+            android:background="@drawable/icon_background_selector"/>
+      </LinearLayout>
+    </RelativeLayout>
+  </android.support.v7.widget.CardView>
 
 </RelativeLayout>

@@ -68,6 +68,9 @@ open class BaseMusicDialog : BaseDialog(), MusicEventCallback {
   override fun onPlayStateChange() {
   }
 
+  override fun onLoveStateChange() {
+  }
+
   override fun onServiceConnected(service: MusicService) {}
 
   override fun onServiceDisConnected() {}

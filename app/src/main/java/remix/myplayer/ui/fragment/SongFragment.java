@@ -69,9 +69,9 @@ public class SongFragment extends LibraryFragment<Song, SongAdapter> {
 
       @Override
       public void onItemLongClick(View view, int position) {
-        if (getUserVisibleHint()) {
-          mChoice.longClick(position, mAdapter.getDatas().get(position));
-        }
+//        if (getUserVisibleHint()) {
+//          mChoice.longClick(position, mAdapter.getDatas().get(position));
+//        }
       }
     });
 

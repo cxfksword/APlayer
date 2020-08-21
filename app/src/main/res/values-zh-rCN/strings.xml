@@ -409,4 +409,10 @@
   <string name="deleting">删除中</string>
   <string name="adding">添加中</string>
   <string name="send_log">是否同时发送日志?</string>
+
+  <string name="manage">管理</string>
+  <string name="manage_local_songs">本地歌曲</string>
+  <string name="manage_local_songs_summary">查看所有本地歌曲</string>
+  <string name="manage_my_favorite">我的收藏</string>
+  <string name="manage_my_favorite_summary">查看我收藏的歌曲</string>
 </resources>

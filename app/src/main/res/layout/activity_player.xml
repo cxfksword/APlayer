@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:fitsSystemWindows="true"
@@ -18,13 +19,15 @@
       <!-- 顶部自定义actionbar、-->
       <include
         layout="@layout/layout_player_topbar"
-        android:id="@+id/top_actionbar"/>
+        android:id="@+id/top_actionbar" />
+
 
       <RelativeLayout
         android:layout_below="@id/top_actionbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <!--三个导航图标-->
+
         <LinearLayout
           android:id="@+id/holder_indicator"
           android:layout_width="match_parent"
@@ -33,21 +36,8 @@
           android:layout_alignParentBottom="true"
           android:layout_centerHorizontal="true"
           android:paddingTop="@dimen/d2_size"
-          android:gravity="center">
-          <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/guide_01"
-            android:layout_marginEnd="@dimen/d4_size"/>
-          <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/guide_02"
-            android:layout_marginEnd="@dimen/d4_size"/>
-          <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/guide_03"/>
+          android:gravity="center" android:visibility="gone">
+
         </LinearLayout>
         <!-- 中间三个页面 -->
         <remix.myplayer.ui.widget.AudioViewPager
@@ -59,56 +49,8 @@
       </RelativeLayout>
     </RelativeLayout>
 
-    <RelativeLayout
-      android:id="@+id/layout_player_seekbar"
-      android:layout_width="match_parent"
-      android:layout_height="0dp"
-      android:layout_weight="1">
-      <!--已播放时间-->
-      <TextView
-        android:id="@+id/text_hasplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:textSize="@dimen/s12_size"
-        android:text="00:00"
-        android:layout_marginLeft="@dimen/d20_size"
-        android:layout_alignParentLeft="true"
-        android:textColor="@color/player_time_text_color"/>
-      <!--剩余播放时间-->
-      <TextView
-        android:id="@+id/text_remain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:textSize="@dimen/s12_size"
-        android:text="00:00"
-        android:layout_marginRight="@dimen/d20_size"
-        android:layout_alignParentRight="true"
-        android:textColor="@color/player_time_text_color"/>
-      <SeekBar
-        android:id="@+id/seekbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="@dimen/d2_size"
-        android:maxHeight="@dimen/d2_size"
-        android:progressDrawable="@drawable/bg_progress"
-        android:paddingStart="@dimen/player_seekbar_padding"
-        android:paddingEnd="@dimen/player_seekbar_padding"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@id/text_remain"
-        android:layout_toRightOf="@id/text_hasplay"
-        android:layout_marginStart="@dimen/player_seekbar_margin"
-        android:layout_marginEnd="@dimen/player_seekbar_margin"/>
-    </RelativeLayout>
-
-    <!-- 三个播放控制按钮和两个控制播放模式 -->
-    <include
-      layout="@layout/layout_player_control"
-      android:id="@+id/layout_player_control"/>
-
-    <include
-      layout="@layout/layout_player_volume"
-      android:id="@+id/layout_player_volume"/>
+    <com.heytap.wearable.support.widget.pageindicator.HeyPageIndicator
+        android:id="@+id/indicator" android:layout_width="wrap_content" android:layout_height="24dp" android:layout_gravity="bottom|center" app:dotColor="@color/black" app:dotSize="6dp"
+        app:dotSpacing="3dp" app:dotStrokeWidth="0.7dp" app:dotCornerRadius="3dp" app:traceDotColor="@color/white" />
   </LinearLayout>
 </FrameLayout>

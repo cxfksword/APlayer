@@ -16,6 +16,8 @@ interface MusicEventCallback {
 
   fun onPlayStateChange()
 
+  fun onLoveStateChange()
+
   fun onServiceDisConnected()
 
   fun onTagChanged(oldSong: Song, newSong: Song)

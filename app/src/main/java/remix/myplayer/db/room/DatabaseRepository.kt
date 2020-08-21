@@ -5,7 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.provider.MediaStore
 import com.google.gson.Gson
-import com.tencent.bugly.crashreport.CrashReport
+//import com.tencent.bugly.crashreport.CrashReport
 import io.reactivex.Completable
 import io.reactivex.CompletableSource
 import io.reactivex.Single
@@ -88,7 +88,7 @@ class DatabaseRepository private constructor() {
           count += db.playQueueDao().deleteSongs(audioIds.subList(i * MAX_ARGUMENT_COUNT, lastIndex))
         } catch (e: Exception) {
           Timber.e(e)
-          CrashReport.postCatchedException(e)
+//          CrashReport.postCatchedException(e)
         }
       }
       Timber.v("deleteFromPlayQueueInternal, count: $count")
@@ -212,6 +212,16 @@ class DatabaseRepository private constructor() {
         }
   }
 
+    /**
+     * 获取我的收藏播放列表
+     */
+    fun getMyLovePlayList(): Single<PlayList> {
+        return Single
+                .fromCallable {
+                    db.playListDao().selectById(myLoveId)
+                }
+    }
+
   /**
    * 获取播放列表
    */
@@ -304,6 +314,13 @@ class DatabaseRepository private constructor() {
         }
 
   }
+
+    /**
+     * 获取我的收藏对应的播放列表ID
+     */
+    fun getMyLovePlayListId(): Int {
+        return this.myLoveId
+    }
 
   /**
    * 获取播放队列

@@ -228,27 +228,27 @@ public final class ToolbarContentTintHelper {
   @CheckResult
   @ColorInt
   public static int toolbarContentColor(@NonNull Context context, @ColorInt int toolbarColor) {
-    if (ColorUtil.isColorCloseToWhite(toolbarColor)) {
-      return toolbarSubtitleColor(context, toolbarColor);
-    }
+//    if (ColorUtil.isColorCloseToWhite(toolbarColor)) {
+//      return toolbarSubtitleColor(context, toolbarColor);
+//    }
     return toolbarTitleColor(context, toolbarColor);
   }
 
   @CheckResult
   @ColorInt
   public static int toolbarSubtitleColor(@NonNull Context context, @ColorInt int toolbarColor) {
-    if (ColorUtil.isColorCloseToWhite(toolbarColor)) {
-      return ContextCompat.getColor(context, R.color.secondary_text_default_material_light);
-    }
+//    if (ColorUtil.isColorCloseToWhite(toolbarColor)) {
+//      return ContextCompat.getColor(context, R.color.secondary_text_default_material_light);
+//    }
     return ContextCompat.getColor(context, R.color.secondary_text_default_material_dark);
   }
 
   @CheckResult
   @ColorInt
   public static int toolbarTitleColor(@NonNull Context context, @ColorInt int toolbarColor) {
-    if (ColorUtil.isColorCloseToWhite(toolbarColor)) {
-      return ContextCompat.getColor(context, R.color.primary_text_default_material_light);
-    }
+//    if (ColorUtil.isColorCloseToWhite(toolbarColor)) {
+//      return ContextCompat.getColor(context, R.color.primary_text_default_material_light);
+//    }
     return ContextCompat.getColor(context, R.color.primary_text_default_material_dark);
   }
 

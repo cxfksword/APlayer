@@ -258,9 +258,9 @@ class MusicService : BaseService(), Playback, MusicEventCallback,
   /**
    * 监听锁屏
    */
-  private val screenReceiver: ScreenReceiver by lazy {
-    ScreenReceiver()
-  }
+//  private val screenReceiver: ScreenReceiver by lazy {
+//    ScreenReceiver()
+//  }
   private var screenOn = true
 
   /**
@@ -520,7 +520,7 @@ class MusicService : BaseService(), Playback, MusicEventCallback,
     val screenFilter = IntentFilter()
     screenFilter.addAction(Intent.ACTION_SCREEN_ON)
     screenFilter.addAction(Intent.ACTION_SCREEN_OFF)
-    registerReceiver(screenReceiver, screenFilter)
+//    registerReceiver(screenReceiver, screenFilter)
 
     //监听数据库变化
     contentResolver.registerContentObserver(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, true, mediaStoreObserver)
@@ -692,7 +692,7 @@ class MusicService : BaseService(), Playback, MusicEventCallback,
     unregisterLocalReceiver(musicEventReceiver)
     unregisterLocalReceiver(widgetReceiver)
     unregisterReceiver(this, headSetReceiver)
-    unregisterReceiver(this, screenReceiver)
+//    unregisterReceiver(this, screenReceiver)
 
     getSharedPreferences(SETTING_KEY.NAME, Context.MODE_PRIVATE).unregisterOnSharedPreferenceChangeListener(this)
 
@@ -951,6 +951,10 @@ class MusicService : BaseService(), Playback, MusicEventCallback,
 
   }
 
+  override fun onLoveStateChange() {
+
+  }
+
   override fun onServiceConnected(service: MusicService) {
 
   }
@@ -1119,6 +1123,10 @@ class MusicService : BaseService(), Playback, MusicEventCallback,
     sendLocalBroadcast(Intent(PLAY_STATE_CHANGE))
   }
 
+  private fun handleLoveStateChange() {
+    sendLocalBroadcast(Intent(LOVE_STATE_CHANGE))
+  }
+
   /**
    * 接受控制命令 包括暂停、播放、上下首、改版播放模式等
    */
@@ -1209,6 +1217,7 @@ class MusicService : BaseService(), Playback, MusicEventCallback,
               if (it) {
                 isLove = !isLove
                 updateAppwidget()
+                uiHandler.sendEmptyMessage(UPDATE_LOVE_STATE)
               }
             }, {
               Timber.v(it)
@@ -1867,6 +1876,7 @@ class MusicService : BaseService(), Playback, MusicEventCallback,
       val musicService = ref.get() ?: return
       when (msg.what) {
         UPDATE_PLAY_STATE -> musicService.handlePlayStateChange()
+        UPDATE_LOVE_STATE -> musicService.handleLoveStateChange()
         UPDATE_META_DATA -> {
 //          musicService.handlePlayStateChange()
           musicService.handleMetaChange()
@@ -1936,6 +1946,8 @@ class MusicService : BaseService(), Playback, MusicEventCallback,
     const val REMOVE_DESKTOP_LRC = 1005
     //添加桌面歌词
     const val CREATE_DESKTOP_LRC = 1006
+    //更新收藏状态
+    const val UPDATE_LOVE_STATE = 1007
 
     private const val APLAYER_PACKAGE_NAME = "remix.myplayer"
     //媒体数据库变化
@@ -1948,6 +1960,8 @@ class MusicService : BaseService(), Playback, MusicEventCallback,
     const val META_CHANGE = "$APLAYER_PACKAGE_NAME.meta.change"
     //播放状态变化
     const val PLAY_STATE_CHANGE = "$APLAYER_PACKAGE_NAME.play_state.change"
+    //收藏状态变化
+    const val LOVE_STATE_CHANGE = "$APLAYER_PACKAGE_NAME.love_state.change"
     //歌曲标签变化
     const val TAG_CHANGE = "$APLAYER_PACKAGE_NAME.tag_change"
 

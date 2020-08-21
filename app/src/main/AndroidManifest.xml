@@ -12,13 +12,13 @@
   <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
   <uses-permission android:name="android.permission.VIBRATE"/>
   <uses-permission android:name="android.permission.WAKE_LOCK"/>
-  <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-  <uses-permission android:name="android.permission.READ_LOGS"/>
   <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
   <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
   <uses-permission android:name="android.hardware.sensor.accelerometer"/>
   <uses-permission android:name="com.android.vending.BILLING"/>
   <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
+  <uses-feature android:name="android.hardware.type.watch"/>
 
   <application
     android:allowBackup="true"
@@ -38,10 +38,7 @@
       android:name=".ui.activity.MainActivity"
       android:theme="@style/ActivityStyle">
       <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
         <action android:name="android.intent.action.MUSIC_PLAYER"/>
-
-        <category android:name="android.intent.category.LAUNCHER"/>
         <category android:name="android.intent.category.APP_MUSIC"/>
         <category android:name="android.intent.category.DEFAULT"/>
       </intent-filter>
@@ -85,12 +82,12 @@
     <!-- 播放界面 -->
     <activity
       android:name=".ui.activity.PlayerActivity"
-      android:parentActivityName=".ui.activity.MainActivity"
+      android:parentActivityName=".ui.activity.WelcomeActivity"
       android:theme="@style/PlayerActivityStyle"
       android:windowSoftInputMode="adjustPan">
       <meta-data
         android:name="android.support.PARENT_ACTIVITY"
-        android:value=".ui.activity.MainActivity"/>
+        android:value=".ui.activity.WelcomeActivity"/>
     </activity>
     <!-- 搜索 -->
     <activity
@@ -149,9 +146,22 @@
       android:launchMode="singleInstance"
       android:name=".appshortcuts.AppShortcutActivity"
       android:theme="@style/AppShortcut"/>
+    <!-- 管理界面 -->
+    <activity android:name=".ui.activity.ManageActivity" android:theme="@style/ActivityStyle"/>
+    <!-- 本地歌曲 -->
+    <activity android:name=".ui.activity.LocalSongActivity" android:theme="@style/ActivityStyle"/>
 
     <!-- 图片裁剪 -->
     <activity android:name="com.soundcloud.android.crop.CropImageActivity"/>
+
+    <activity android:name=".ui.activity.WelcomeActivity" android:theme="@style/WelcomeSplash">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </activity>
+
+
 
 
     <!-- 线控 -->
@@ -178,6 +188,7 @@
 
     <!-- 桌面部件 -->
     <receiver
+      android:enabled="false"
       android:label="@string/app_widget_big_name"
       android:name=".appwidgets.big.AppWidgetBig">
       <intent-filter>
@@ -189,6 +200,7 @@
         android:resource="@xml/appwidget_big_info"/>
     </receiver>
     <receiver
+      android:enabled="false"
       android:label="@string/app_widget_medium_name"
       android:name=".appwidgets.medium.AppWidgetMedium">
       <intent-filter>
@@ -200,6 +212,7 @@
         android:resource="@xml/appwidget_medium_info"/>
     </receiver>
     <receiver
+      android:enabled="false"
       android:label="@string/app_widget_small_name"
       android:name=".appwidgets.small.AppWidgetSmall">
       <intent-filter>
@@ -212,6 +225,7 @@
     </receiver>
     <!--透明桌面部件-->
     <receiver
+      android:enabled="false"
       android:label="@string/app_widget_medium_transparent_name"
       android:name=".appwidgets.medium.AppWidgetMediumTransparent">
       <intent-filter>
@@ -223,6 +237,7 @@
         android:resource="@xml/appwidget_medium_transparent_info"/>
     </receiver>
     <receiver
+      android:enabled="false"
       android:label="@string/app_widget_small_transparent_name"
       android:name=".appwidgets.small.AppWidgetSmallTransparent">
       <intent-filter>

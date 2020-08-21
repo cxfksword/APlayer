@@ -108,8 +108,8 @@ public class SongAdapter extends HeaderAdapter<Song, BaseViewHolder> implements
     final SongViewHolder holder = (SongViewHolder) baseHolder;
 
     //封面
-    holder.mImage.setTag(
-        setImage(holder.mImage, getSearchRequestWithAlbumType(song), SMALL_IMAGE_SIZE, position));
+//    holder.mImage.setTag(
+//        setImage(holder.mImage, getSearchRequestWithAlbumType(song), SMALL_IMAGE_SIZE, position));
 
 //        //是否为无损
 //        if(!TextUtils.isEmpty(song.getDisplayName())){
@@ -223,8 +223,8 @@ public class SongAdapter extends HeaderAdapter<Song, BaseViewHolder> implements
     TextView mName;
     @BindView(R.id.song_other)
     TextView mOther;
-    @BindView(R.id.song_head_image)
-    SimpleDraweeView mImage;
+//    @BindView(R.id.song_head_image)
+//    SimpleDraweeView mImage;
     @BindView(R.id.song_button)
     ImageButton mButton;
     @BindView(R.id.item_root)

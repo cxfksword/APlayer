@@ -2,14 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'bugly'
-
-bugly {
-    appId = "${getProperty(getProperties('../local.properties'), 'BUGLY_APPID')}"
-    appKey = "04ab39c8-86fc-4ed6-b28b-6fdfee6e19d9"
-}
 
 repositories {
+    maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
     maven {
         url 'https://maven.google.com'
     }
@@ -29,7 +24,7 @@ android {
         targetSdkVersion 28
 
         versionCode 15630
-        versionName "1.5.6.3"
+        versionName "1.0 watch版"
 
         flavorDimensions "default"
         vectorDrawables.useSupportLibrary = true
@@ -43,30 +38,13 @@ android {
 
         buildConfigField("String", "LASTFM_API_KEY", "\"${getProperty(getProperties('../local.properties'), 'LASTFM_API_KEY')}\"")
         buildConfigField("String", "GOOGLE_PLAY_LICENSE_KEY", "\"${getProperty(getProperties('../local.properties'), 'GOOGLE_PLAY_LICENSE_KEY')}\"")
-        buildConfigField("String", "BUGLY_APPID", "\"${getProperty(getProperties('../local.properties'), 'BUGLY_APPID')}\"")
         buildConfigField("String", "GITHUB_SECRET_KEY", "\"${getProperty(getProperties('../local.properties'), 'GITHUB_SECRET_KEY')}\"")
     }
 
-    signingConfigs {
-        debug {
-            v1SigningEnabled true
-            v2SigningEnabled true
-        }
-        release {
-            def properties = getProperties('../local.properties')
-            keyAlias properties['keystore.keyAlias']
-            keyPassword properties['keystore.keyPassword']
-            storeFile file(properties['keystore.storeFile'])
-            storePassword properties['keystore.storePassword']
 
-            v1SigningEnabled true
-            v2SigningEnabled true
-        }
-    }
 
     buildTypes {
         debug {
-            signingConfig signingConfigs.release
             debuggable true
             minifyEnabled false
 
@@ -79,7 +57,6 @@ android {
         }
         release {
             //混淆代码
-            signingConfig signingConfigs.release
             minifyEnabled true
             debuggable false
             zipAlignEnabled true
@@ -151,7 +128,7 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
 
     //support
@@ -195,9 +172,6 @@ dependencies {
     implementation 'com.jakewharton:butterknife:9.0.0'
     kapt 'com.jakewharton:butterknife-compiler:9.0.0'
 
-    //bugly
-    implementation 'com.tencent.bugly:crashreport:3.0.0'
-
     //gp
     implementation 'com.anjlab.android.iab.v3:library:1.0.44'
 
@@ -222,6 +196,7 @@ dependencies {
     implementation 'com.github.promeg:tinypinyin:2.0.1'
     implementation 'org.slf4j:slf4j-api:1.7.28'
     implementation 'com.github.tony19:logback-android:2.0.0'
+    implementation 'com.github.lzyzsd:circleprogress:1.2.1'
 
 }
 

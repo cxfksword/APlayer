@@ -1,5 +1,6 @@
 package remix.myplayer.ui.fragment.base
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.View
@@ -11,6 +12,21 @@ import remix.myplayer.ui.activity.base.BaseMusicActivity
 
 open class BaseMusicFragment : BaseFragment(), MusicEventCallback {
   private var mMusicActivity: BaseMusicActivity? = null
+  protected var mIsForeground = false
+
+  fun getIsForeground() : Boolean {
+    return mIsForeground
+  }
+
+  override fun onResume() {
+    super.onResume()
+    mIsForeground = true
+  }
+
+  override fun onPause() {
+    super.onPause()
+    mIsForeground = false
+  }
 
   override fun onAttach(context: Context?) {
     super.onAttach(context)
@@ -55,6 +71,9 @@ open class BaseMusicFragment : BaseFragment(), MusicEventCallback {
   }
 
   override fun onPlayStateChange() {
+  }
+
+  override fun onLoveStateChange() {
   }
 
   override fun onTagChanged(oldSong: Song, newSong: Song) {

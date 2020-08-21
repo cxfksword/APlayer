@@ -107,13 +107,13 @@ public class ChildHolderAdapter extends HeaderAdapter<Song, BaseViewHolder> impl
     if (song == null || song.getId() < 0 || song.getTitle()
         .equals(context.getString(R.string.song_lose_effect))) {
       holder.mName.setText(R.string.song_lose_effect);
-      holder.mButton.setVisibility(View.INVISIBLE);
+//      holder.mButton.setVisibility(View.INVISIBLE);
     } else {
-      holder.mButton.setVisibility(View.VISIBLE);
+//      holder.mButton.setVisibility(View.VISIBLE);
 
       //封面
-      holder.mImage.setTag(
-          setImage(holder.mImage, getSearchRequestWithAlbumType(song), SMALL_IMAGE_SIZE, position));
+//      holder.mImage.setTag(
+//          setImage(holder.mImage, getSearchRequestWithAlbumType(song), SMALL_IMAGE_SIZE, position));
 
       //高亮
       if (MusicServiceRemote.getCurrentSong().getId() == song.getId()) {
@@ -225,8 +225,8 @@ public class ChildHolderAdapter extends HeaderAdapter<Song, BaseViewHolder> impl
 
   static class ChildHolderViewHolder extends BaseViewHolder {
 
-    @BindView(R.id.song_head_image)
-    SimpleDraweeView mImage;
+//    @BindView(R.id.song_head_image)
+//    SimpleDraweeView mImage;
     @BindView(R.id.song_title)
     TextView mName;
     @BindView(R.id.song_other)
